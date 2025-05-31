@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matías Ponce - Ingeniero Civil Industrial | Analista de Datos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth; /* Smooth scroll for anchor links if used, JS handles nav clicks */
+        }
+        .section {
+            display: none; /* Hidden by default, shown by JS */
+            min-height: calc(100vh - 80px); /* Full viewport height minus navbar, assuming navbar is approx 80px */
+            padding-top: 20px; /* Add some padding at the top of the section content */
+            scroll-margin-top: 80px; /* Offset for sticky navbar height */
+        }
+        .section.active {
+            display: block;
+        }
+        .lang-en, .lang-es {
+            display: none; /* Content for each language hidden by default */
+        }
+        .lang-es.active-lang, .lang-en.active-lang {
+            display: block; /* Show active language content */
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .fade-in {
+            animation: fadeInAnimation 0.5s ease-in forwards;
+        }
+        @keyframes fadeInAnimation {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .profile-photo-container {
+            width: 200px; 
+            height: 200px; 
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto;
+            border: 4px solid #4F46E5; /* Indigo color */
+        }
+        .profile-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <nav id="navbar" class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="lang-es active-lang">
+                <a href="#" class="text-2xl font-bold text-indigo-600 hover:text-indigo-700 transition duration-300" onclick="showSection('home')">Matías Ponce</a>
+            </div>
+            <div class="lang-en">
+                <a href="#" class="text-2xl font-bold text-indigo-600 hover:text-indigo-700 transition duration-300" onclick="showSection('home')">Matías Ponce</a>
+            </div>
+            <div class="flex items-center space-x-6"> 
+                <div class="lang-es active-lang space-x-6"> 
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300" onclick="showSection('home')">Inicio</a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300" onclick="showSection('portfolio')">Portfolio</a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300" onclick="showSection('tutoring')">Clases</a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300" onclick="showSection('contact')">Contacto</a>
+                </div>
+                 <div class="lang-en space-x-6"> 
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300" onclick="showSection('home')">Home</a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300" onclick="showSection('portfolio')">Portfolio</a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300" onclick="showSection('tutoring')">Tutoring</a>
+                     <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300" onclick="showSection('contact')">Contact</a>
+                </div>
+                <button id="languageToggle" class="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 transition duration-300 text-sm">
+                    English
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="mainContent" class="container mx-auto px-6 py-8">
+
+        <section id="home" class="section active fade-in">
+            <div class="lang-es active-lang">
+                <div class="text-center mb-12">
+                    <div class="profile-photo-container mb-6">
+                        {/* Reemplaza el src con la URL de tu foto actual */}
+                        <img id="profileImagePreviewEs" src="https://placehold.co/300x300/E2E8F0/334155?text=Tu+Foto+Aqu%C3%AD" alt="Foto Profesional de Matías Ponce" class="profile-photo">
+                    </div>
+                    <h1 class="text-4xl md:text-5xl font-bold text-indigo-700 mb-2">Matías Ponce Holtmann</h1>
+                    <p class="text-xl text-gray-600 mb-6">Ingeniero Civil Industrial | Análisis de Datos y Business Intelligence</p>
+                    <a href="https://www.linkedin.com/in/matias-ponce-h/" target="_blank" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300 shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.205v4.25h-2.668V7.378h2.567v1.174h.037c.356-.675 1.227-1.387 2.528-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.337 7.378h2.67V16.338H5.337V7.378zm.002-2.496a1.501 1.501 0 110-3.002 1.501 1.501 0 010 3.002z" clip-rule="evenodd" />
+                        </svg>
+                        Perfil de LinkedIn
+                    </a>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg mb-8 card-hover">
+                    <h2 class="text-3xl font-semibold text-indigo-600 mb-4">Perfil Profesional</h2>
+                    <p class="text-gray-700 leading-relaxed">
+                        Ingeniero Civil Industrial con alto sentido de compromiso, pasión por el aprendizaje y con experiencia en análisis de datos, optimización de procesos y reportería. Especializado en herramientas como PowerBI, Tableau, Python y SQL. Adaptable, con habilidades para generar soluciones creativas y eficientes.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                        <h2 class="text-3xl font-semibold text-indigo-600 mb-4">Experiencia Laboral</h2>
+                        <div class="mb-6">
+                            <h3 class="text-xl font-semibold text-gray-800">Practicante Analista de Datos</h3>
+                            <p class="text-gray-600 italic">Walmart Chile, Quilicura (Home Office) | 09/2022 - 02/2023</p>
+                            <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+                                <li>Desarrollo de tareas de mantenimiento y mejora en proceso de reportería.</li>
+                                <li>Optimización de ETL, limpieza y consolidación de bases de datos.</li>
+                                <li>Desarrollo, modificación y migración de vistas en PowerBI y Tableau para Walmart Connect.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800">Apoyo de Mantención y Planificación</h3>
+                            <p class="text-gray-600 italic">Skretting Chile, Osorno | 01/2018 - 02/2018</p>
+                            <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+                                <li>Soporte para mantención y planificación.</li>
+                                <li>Limpieza, orden y montaje de equipamiento industrial.</li>
+                                <li>Asistencia en el manejo de datos para planes de mantenimiento.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                        <h2 class="text-3xl font-semibold text-indigo-600 mb-4">Educación y Certificaciones</h2>
+                        <div class="mb-6">
+                            <h3 class="text-xl font-semibold text-gray-800">Ingeniero Civil Industrial</h3>
+                            <p class="text-gray-600 italic">Universidad Técnica Federico Santa María, Valparaíso | 2013 - 2023</p>
+                            <p class="text-gray-700 mt-1">Licenciado en Ciencias de la Ingeniería Civil Industrial (2021).</p>
+                            <p class="text-gray-700 mt-1"><strong>Memoria de Grado:</strong> Implementación para un sistema de control interno de delivery mediante una plataforma digital de gestión de información para el Banco Itaú Corpbanca (2023).</p>
+                        </div>
+                         <h3 class="text-xl font-semibold text-gray-800 mb-2">Cursos Destacados</h3>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1">
+                            <li>Google Data Analytics Professional Certificate (2024)</li>
+                            <li>Google Advanced Data Analytics Professional Certificate (2024)</li>
+                            <li>Diplomado en Diseño y Gestión Ágil de Proyectos (2025)</li>
+                            <li>Diplomado en Big Data and Machine Learning (En curso, 2025)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <h2 class="text-3xl font-semibold text-indigo-600 mb-6">Habilidades Técnicas</h2>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                        <div class="text-center p-4 bg-indigo-50 rounded-lg shadow">
+                            <h4 class="font-semibold text-indigo-700">Python</h4>
+                            <p class="text-sm text-gray-600">(Pandas, NumPy, Seaborn, Plotly)</p>
+                        </div>
+                        <div class="text-center p-4 bg-indigo-50 rounded-lg shadow">
+                            <h4 class="font-semibold text-indigo-700">SQL</h4>
+                            <p class="text-sm text-gray-600">(Joins, Subqueries, Funciones Agregadas)</p>
+                        </div>
+                        <div class="text-center p-4 bg-indigo-50 rounded-lg shadow">
+                            <h4 class="font-semibold text-indigo-700">Power BI</h4>
+                             <p class="text-sm text-gray-600">(Dashboards, Power Query)</p>
+                        </div>
+                        <div class="text-center p-4 bg-indigo-50 rounded-lg shadow">
+                            <h4 class="font-semibold text-indigo-700">Tableau</h4>
+                            <p class="text-sm text-gray-600">(Dashboards, Campos Calculados)</p>
+                        </div>
+                        <div class="text-center p-4 bg-indigo-50 rounded-lg shadow">
+                            <h4 class="font-semibold text-indigo-700">Excel Avanzado</h4>
+                            <p class="text-sm text-gray-600">(Tablas Dinámicas, Funciones)</p>
+                        </div>
+                        <div class="text-center p-4 bg-indigo-50 rounded-lg shadow">
+                            <h4 class="font-semibold text-indigo-700">R</h4>
+                            <p class="text-sm text-gray-600">(Tidyr, ggplot2)</p>
+                        </div>
+                        <div class="text-center p-4 bg-indigo-50 rounded-lg shadow">
+                            <h4 class="font-semibold text-indigo-700">VBA</h4>
+                            <p class="text-sm text-gray-600">(Macros)</p>
+                        </div>
+                         <div class="text-center p-4 bg-indigo-50 rounded-lg shadow">
+                            <h4 class="font-semibold text-indigo-700">LaTeX</h4>
+                        </div>
+                    </div>
+                     <p class="text-center mt-6 text-gray-700"><strong>Idiomas:</strong> Inglés (Nivel B2+/C1, EF SET 74/100)</p>
+                </div>
+            </div>
+
+            <div class="lang-en">
+                <div class="text-center mb-12">
+                     <div class="profile-photo-container mb-6">
+                        {/* Reemplaza el src con la URL de tu foto actual */}
+                        <img id="profileImagePreviewEn" src="https://placehold.co/300x300/E2E8F0/334155?text=Your+Photo+Here" alt="Professional Photo of Matías Ponce" class="profile-photo">
+                    </div>
+                    <h1 class="text-4xl md:text-5xl font-bold text-indigo-700 mb-2">Matías Ponce Holtmann</h1>
+                    <p class="text-xl text-gray-600 mb-6">Industrial Engineer | Data Analysis & Business Intelligence</p>
+                     <a href="https://www.linkedin.com/in/matias-ponce-h/" target="_blank" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300 shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.205v4.25h-2.668V7.378h2.567v1.174h.037c.356-.675 1.227-1.387 2.528-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.337 7.378h2.67V16.338H5.337V7.378zm.002-2.496a1.501 1.501 0 110-3.002 1.501 1.501 0 010 3.002z" clip-rule="evenodd" />
+                        </svg>
+                        LinkedIn Profile
+                    </a>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg mb-8 card-hover">
+                    <h2 class="text-3xl font-semibold text-indigo-600 mb-4">Professional Profile</h2>
+                    <p class="text-gray-700 leading-relaxed">
+                        Industrial Engineer with a strong sense of commitment, passion for learning, and experience in data analysis, process optimization, and reporting. Specialized in tools like PowerBI, Tableau, Python, and SQL. Adaptable, with skills to generate creative and efficient solutions.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                        <h2 class="text-3xl font-semibold text-indigo-600 mb-4">Work Experience</h2>
+                        <div class="mb-6">
+                            <h3 class="text-xl font-semibold text-gray-800">Data Analyst Intern</h3>
+                            <p class="text-gray-600 italic">Walmart Chile, Quilicura (Remote) | 09/2022 - 02/2023</p>
+                            <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+                                <li>Maintenance and improvement tasks in reporting processes.</li>
+                                <li>ETL optimization, data cleaning, and database consolidation.</li>
+                                <li>Development, modification, and migration of views in PowerBI and Tableau for Walmart Connect.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800">Maintenance and Planning Support</h3>
+                            <p class="text-gray-600 italic">Skretting Chile, Osorno | 01/2018 - 02/2018</p>
+                            <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+                                <li>Support for maintenance and planning activities.</li>
+                                <li>Cleaning, organizing, and assembly of industrial equipment.</li>
+                                <li>Assisted in data management for machinery maintenance plans.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                        <h2 class="text-3xl font-semibold text-indigo-600 mb-4">Education & Certifications</h2>
+                        <div class="mb-6">
+                            <h3 class="text-xl font-semibold text-gray-800">Industrial Engineer</h3>
+                            <p class="text-gray-600 italic">Universidad Técnica Federico Santa María, Valparaíso | 2013 - 2023</p>
+                            <p class="text-gray-700 mt-1">Bachelor of Science in Industrial Engineering (2021).</p>
+                            <p class="text-gray-700 mt-1"><strong>Thesis:</strong> Implementation of an internal delivery control system using a digital information management platform for Banco Itaú Corpbanca (2023).</p>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Key Courses</h3>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1">
+                            <li>Google Data Analytics Professional Certificate (2024)</li>
+                            <li>Google Advanced Data Analytics Professional Certificate (2024)</li>
+                            <li>Diploma in Agile Project Design and Management (2025)</li>
+                            <li>Diploma in Big Data and Machine Learning (Ongoing, 2025)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <h2 class="text-3xl font-semibold text-indigo-600 mb-6">Technical Skills</h2>
+                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                        <div class="text-center p-4 bg-indigo-50 rounded-lg shadow">
+                            <h4 class="font-semibold text-indigo-700">Python</h4>
+                            <p class="text-sm text-gray-600">(Pandas, NumPy, Seaborn, Plotly)</p>
+                        </div>
+                        <div class="text-center p-4 bg-indigo-50 rounded-lg shadow">
+                            <h4 class="font-semibold text-indigo-700">SQL</h4>
+                            <p class="text-sm text-gray-600">(Joins, Subqueries, Aggregate Functions)</p>
+                        </div>
+                        <div class="text-center p-4 bg-indigo-50 rounded-lg shadow">
+                            <h4 class="font-semibold text-indigo-700">Power BI</h4>
+                             <p class="text-sm text-gray-600">(Dashboards, Power Query)</p>
+                        </div>
+                        <div class="text-center p-4 bg-indigo-50 rounded-lg shadow">
+                            <h4 class="font-semibold text-indigo-700">Tableau</h4>
+                            <p class="text-sm text-gray-600">(Dashboards, Calculated Fields)</p>
+                        </div>
+                        <div class="text-center p-4 bg-indigo-50 rounded-lg shadow">
+                            <h4 class="font-semibold text-indigo-700">Advanced Excel</h4>
+                            <p class="text-sm text-gray-600">(Pivot Tables, Functions)</p>
+                        </div>
+                        <div class="text-center p-4 bg-indigo-50 rounded-lg shadow">
+                            <h4 class="font-semibold text-indigo-700">R</h4>
+                            <p class="text-sm text-gray-600">(Tidyr, ggplot2)</p>
+                        </div>
+                        <div class="text-center p-4 bg-indigo-50 rounded-lg shadow">
+                            <h4 class="font-semibold text-indigo-700">VBA</h4>
+                            <p class="text-sm text-gray-600">(Macros)</p>
+                        </div>
+                         <div class="text-center p-4 bg-indigo-50 rounded-lg shadow">
+                            <h4 class="font-semibold text-indigo-700">LaTeX</h4>
+                        </div>
+                    </div>
+                    <p class="text-center mt-6 text-gray-700"><strong>Languages:</strong> Native Spanish, English (Level B2+/C1, EF SET 74/100)</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="section fade-in">
+            <div class="lang-es active-lang">
+                <h2 class="text-4xl font-bold text-center text-indigo-700 mb-12">Portfolio de Proyectos</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                        <img src="https://placehold.co/600x400/A5B4FC/312E81?text=Proyecto+1" alt="Visualización de Datos Proyecto 1" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold text-indigo-600 mb-2">Análisis de Ventas Minoristas</h3>
+                            <p class="text-gray-700 mb-4 text-sm">
+                                Un análisis exhaustivo de datos de ventas para identificar tendencias, optimizar inventario y mejorar estrategias de marketing.
+                            </p>
+                            <p class="text-gray-600 text-xs mb-3"><strong>Tecnologías:</strong> Python (Pandas, Matplotlib), SQL, Tableau</p>
+                            <a href="#" class="inline-block bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 transition duration-300 text-sm">Ver Proyecto (Pronto)</a>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                        <img src="https://placehold.co/600x400/C4B5FD/4338CA?text=Proyecto+2" alt="Modelo Predictivo Proyecto 2" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold text-indigo-600 mb-2">Modelo Predictivo de Deserción de Clientes</h3>
+                            <p class="text-gray-700 mb-4 text-sm">
+                                Desarrollo de un modelo de machine learning para predecir la probabilidad de que un cliente abandone un servicio.
+                            </p>
+                             <p class="text-gray-600 text-xs mb-3"><strong>Tecnologías:</strong> Python (Scikit-learn, Pandas), Jupyter Notebooks</p>
+                            <a href="#" class="inline-block bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 transition duration-300 text-sm">Ver Proyecto (Pronto)</a>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                        <img src="https://placehold.co/600x400/DDD6FE/4F46E5?text=Proyecto+3" alt="Dashboard Interactivo Proyecto 3" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold text-indigo-600 mb-2">Dashboard Interactivo de KPIs</h3>
+                            <p class="text-gray-700 mb-4 text-sm">
+                                Creación de un dashboard en Power BI para visualizar indicadores clave de rendimiento (KPIs) de un departamento.
+                            </p>
+                            <p class="text-gray-600 text-xs mb-3"><strong>Tecnologías:</strong> Power BI, DAX, SQL</p>
+                            <a href="#" class="inline-block bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 transition duration-300 text-sm">Ver Proyecto (Pronto)</a>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+            <div class="lang-en">
+                <h2 class="text-4xl font-bold text-center text-indigo-700 mb-12">Project Portfolio</h2>
+                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                        <img src="https://placehold.co/600x400/A5B4FC/312E81?text=Project+1" alt="Data Visualization Project 1" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold text-indigo-600 mb-2">Retail Sales Analysis</h3>
+                            <p class="text-gray-700 mb-4 text-sm">
+                                A comprehensive analysis of sales data to identify trends, optimize inventory, and improve marketing strategies.
+                            </p>
+                            <p class="text-gray-600 text-xs mb-3"><strong>Technologies:</strong> Python (Pandas, Matplotlib), SQL, Tableau</p>
+                            <a href="#" class="inline-block bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 transition duration-300 text-sm">View Project (Soon)</a>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                        <img src="https://placehold.co/600x400/C4B5FD/4338CA?text=Project+2" alt="Predictive Model Project 2" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold text-indigo-600 mb-2">Customer Churn Predictive Model</h3>
+                            <p class="text-gray-700 mb-4 text-sm">
+                                Development of a machine learning model to predict the likelihood of a customer discontinuing a service.
+                            </p>
+                             <p class="text-gray-600 text-xs mb-3"><strong>Technologies:</strong> Python (Scikit-learn, Pandas), Jupyter Notebooks</p>
+                            <a href="#" class="inline-block bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 transition duration-300 text-sm">View Project (Soon)</a>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                        <img src="https://placehold.co/600x400/DDD6FE/4F46E5?text=Project+3" alt="Interactive Dashboard Project 3" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-semibold text-indigo-600 mb-2">Interactive KPI Dashboard</h3>
+                            <p class="text-gray-700 mb-4 text-sm">
+                                Creation of a Power BI dashboard to visualize key performance indicators (KPIs) for a department.
+                            </p>
+                            <p class="text-gray-600 text-xs mb-3"><strong>Technologies:</strong> Power BI, DAX, SQL</p>
+                            <a href="#" class="inline-block bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 transition duration-300 text-sm">View Project (Soon)</a>
+                        </div>
+                    </div>
+                    </div>
+            </div>
+        </section>
+
+        <section id="tutoring" class="section fade-in">
+            <div class="lang-es active-lang"> <h2 class="text-4xl font-bold text-center text-indigo-700 mb-12">Clases Particulares</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                        <h3 class="text-3xl font-semibold text-indigo-600 mb-4">Preparación PAES Matemáticas</h3>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Te ayudaré a dominar los contenidos clave para la Prueba de Acceso a la Educación Superior (PAES) en Matemáticas. Mi enfoque es personalizado, con resolución de ejercicios prácticos y material de apoyo diseñado para asegurar tu comprensión.
+                        </p>
+                        <h4 class="text-xl font-semibold text-gray-800 mb-2">Áreas Cubiertas:</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1">
+                            <li>Números</li>
+                            <li>Álgebra</li>
+                            <li>Geometría</li>
+                            <li>Probabilidades y Estadística</li>
+                        </ul>
+                         <p class="mt-4 text-gray-600"><strong>Metodología:</strong> Clases personalizadas, enfoque en la resolución de problemas, material de estudio y seguimiento continuo.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                        <h3 class="text-3xl font-semibold text-indigo-600 mb-4">Introducción a la Programación con Python</h3>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Aprende los fundamentos de la programación utilizando Python, uno de los lenguajes más versátiles y demandados en la actualidad. Ideal para principiantes que deseen iniciar su camino en el mundo del desarrollo y el análisis de datos.
+                        </p>
+                        <h4 class="text-xl font-semibold text-gray-800 mb-2">Contenidos Principales:</h4>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1">
+                            <li>Variables y tipos de datos</li>
+                            <li>Estructuras de control (condicionales, bucles)</li>
+                            <li>Funciones y modularidad</li>
+                            <li>Introducción a la manipulación de datos con librerías básicas</li>
+                        </ul>
+                        <p class="mt-4 text-gray-600"><strong>Metodología:</strong> Enfoque práctico con ejercicios y mini-proyectos, construyendo una base sólida para futuros aprendizajes.</p>
+                    </div>
+                </div>
+                <div class="text-center mt-12">
+                    <p class="text-xl text-gray-700 mb-4">¿Interesado en alguna clase? ¡No dudes en contactarme!</p>
+                    <button onclick="showSection('contact')" class="bg-green-500 text-white px-8 py-3 rounded-lg hover:bg-green-600 transition duration-300 shadow-md text-lg">
+                        Contactar para Clases
+                    </button>
+                </div>
+            </div>
+             <div class="lang-en"> <h2 class="text-4xl font-bold text-center text-indigo-700 mb-12">Tutoring Services</h2>
+                 <p class="text-center text-gray-700 text-lg">Tutoring services are offered in Spanish. Please switch to the Spanish version of the site or contact me for more details.</p>
+                 <div class="text-center mt-8">
+                    <button onclick="switchToLanguage('es'); showSection('tutoring');" class="bg-indigo-500 text-white px-6 py-2 rounded-md hover:bg-indigo-600">View Tutoring in Spanish</button>
+                 </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section fade-in">
+            <div class="lang-es active-lang">
+                <h2 class="text-4xl font-bold text-center text-indigo-700 mb-12">Contacto</h2>
+                <div class="max-w-lg mx-auto bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <p class="text-gray-700 text-lg text-center mb-6">
+                        Si estás interesado en mis servicios, tienes alguna pregunta o quieres discutir una oportunidad laboral, no dudes en contactarme.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            <a href="mailto:matiasmiph@gmail.com" class="text-indigo-600 hover:underline">matiasmiph@gmail.com</a>
+                        </div>
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0119 11.72V15a2 2 0 01-2 2H5a2 2 0 01-2-2V5z" />
+                            </svg>
+                            <a href="tel:+56956964515" class="text-indigo-600 hover:underline">+56 9 5696 4515</a>
+                        </div>
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <span class="text-gray-700">Osorno, Chile</span>
+                        </div>
+                    </div>
+                    <p class="text-center mt-8 text-gray-600">Información actualizada a Mayo 2025.</p>
+                </div>
+            </div>
+            <div class="lang-en">
+                <h2 class="text-4xl font-bold text-center text-indigo-700 mb-12">Contact</h2>
+                <div class="max-w-lg mx-auto bg-white p-8 rounded-xl shadow-lg card-hover">
+                    <p class="text-gray-700 text-lg text-center mb-6">
+                        If you are interested in my services, have any questions, or want to discuss a job opportunity, please feel free to contact me.
+                    </p>
+                     <div class="space-y-4">
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            <a href="mailto:matiasmiph@gmail.com" class="text-indigo-600 hover:underline">matiasmiph@gmail.com</a>
+                        </div>
+                        <div class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0119 11.72V15a2 2 0 01-2 2H5a2 2 0 01-2-2V5z" />
+                            </svg>
+                            <a href="tel:+56956964515" class="text-indigo-600 hover:underline">+56 9 5696 4515</a>
+                        </div>
+                        <div class="flex items-center">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <span class="text-gray-700">Osorno, Chile</span>
+                        </div>
+                    </div>
+                    <p class="text-center mt-8 text-gray-600">Information updated as of May 2025.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center p-6 mt-12">
+        <div class="lang-es active-lang">
+            <p>&copy; <span id="currentYearEs"></span> Matías Ponce Holtmann. Todos los derechos reservados.</p>
+            <p>Diseñado con pasión y código.</p>
+        </div>
+        <div class="lang-en">
+            <p>&copy; <span id="currentYearEn"></span> Matías Ponce Holtmann. All rights reserved.</p>
+            <p>Designed with passion and code.</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentLanguage = 'es'; // Default language
+        const sections = document.querySelectorAll('.section');
+        // const mainContent = document.getElementById('mainContent'); // No longer needed for scrolling the whole main content
+
+        function showSection(sectionId) {
+            let targetSection = null;
+            sections.forEach(section => {
+                if (section.id === sectionId) {
+                    section.classList.add('active', 'fade-in');
+                    targetSection = section; // Store the section to scroll to
+                    // If switching to tutoring, ensure Spanish is active for its content
+                    if (sectionId === 'tutoring') {
+                        switchToLanguage('es', false); // Switch language logic but don't re-show section
+                        // Ensure tutoring specific content is visible
+                        document.querySelector('#tutoring .lang-es').classList.add('active-lang');
+                        document.querySelector('#tutoring .lang-en').classList.remove('active-lang');
+                    }
+                } else {
+                    section.classList.remove('active', 'fade-in');
+                }
+            });
+            
+            // Scroll the target section into view
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+        
+        function updateLanguageContent(lang) {
+            document.documentElement.lang = lang; // Update html lang attribute
+            const langEsElements = document.querySelectorAll('.lang-es');
+            const langEnElements = document.querySelectorAll('.lang-en');
+            const toggleButton = document.getElementById('languageToggle');
+
+            if (lang === 'es') {
+                langEsElements.forEach(el => el.classList.add('active-lang'));
+                langEnElements.forEach(el => el.classList.remove('active-lang'));
+                toggleButton.textContent = 'English';
+            } else {
+                langEnElements.forEach(el => el.classList.add('active-lang'));
+                langEsElements.forEach(el => el.classList.remove('active-lang'));
+                toggleButton.textContent = 'Español';
+            }
+        }
+
+        function switchToLanguage(lang, triggerShowSection = true) {
+            currentLanguage = lang;
+            updateLanguageContent(lang);
+
+            const activeSection = document.querySelector('.section.active');
+            if (activeSection && activeSection.id === 'tutoring') {
+                if (lang === 'en') {
+                    document.querySelector('#tutoring .lang-es').classList.remove('active-lang');
+                    document.querySelector('#tutoring .lang-en').classList.add('active-lang');
+                } else { // lang === 'es'
+                    document.querySelector('#tutoring .lang-en').classList.remove('active-lang');
+                    document.querySelector('#tutoring .lang-es').classList.add('active-lang');
+                }
+            }
+            
+            const navLangEs = document.querySelector('nav .lang-es');
+            const navLangEn = document.querySelector('nav .lang-en');
+            if (lang === 'es') {
+                navLangEs.classList.add('active-lang');
+                navLangEn.classList.remove('active-lang');
+            } else {
+                navLangEn.classList.add('active-lang');
+                navLangEs.classList.remove('active-lang');
+            }
+        }
+
+
+        document.getElementById('languageToggle').addEventListener('click', () => {
+            const newLang = currentLanguage === 'es' ? 'en' : 'es';
+            switchToLanguage(newLang);
+        });
+        
+        // Set current year in footer
+        const year = new Date().getFullYear();
+        const currentYearEsEl = document.getElementById('currentYearEs');
+        const currentYearEnEl = document.getElementById('currentYearEn');
+        if(currentYearEsEl) currentYearEsEl.textContent = year;
+        if(currentYearEnEl) currentYearEnEl.textContent = year;
+
+        // Initial setup
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('home'); // Show home section by default
+            switchToLanguage('es'); // Set default language to Spanish and update content
+        });
+    </script>
+</body>
+</html>
