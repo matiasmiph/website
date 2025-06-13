@@ -20,12 +20,28 @@
         .section.active {
             display: block;
         }
+        /* Reglas CSS para controlar la visibilidad de los bloques de idioma en el contenido */
         .lang-en, .lang-es {
-            display: none; /* Content for each language hidden by default */
+            display: none; /* Ocultar por defecto todo el contenido de idioma */
         }
         .lang-es.active-lang, .lang-en.active-lang {
-            display: block; /* Show active language content */
+            display: block; /* Mostrar solo el contenido del idioma activo */
         }
+        /* Aseguramos que los contenedores de navegación sean flexbox cuando estén activos */
+        #navMenuEs, #navMenuEn {
+            display: none; /* Ocultar por defecto los menús de navegación */
+        }
+        #navMenuEs.active-menu, #navMenuEn.active-menu {
+            display: flex; /* Mostrar como flexbox cuando estén activos */
+            align-items: center;
+        }
+        #siteTitleEs, #siteTitleEn {
+            display: none; /* Ocultar los títulos del sitio por defecto */
+        }
+        #siteTitleEs.active-title, #siteTitleEn.active-title {
+            display: block; /* Mostrar el título activo */
+        }
+
         /* Custom scrollbar for better aesthetics */
         ::-webkit-scrollbar {
             width: 8px;
@@ -56,8 +72,8 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .profile-photo-container {
-            width: 200px; 
-            height: 200px; 
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             overflow: hidden;
             margin: 0 auto;
@@ -74,26 +90,30 @@
 
     <nav id="navbar" class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="lang-es active-lang">
+            <!-- Los títulos Matías Ponce se manejarán por JS para evitar duplicación -->
+            <div id="siteTitleEs" class="active-title">
                 <a href="#" class="text-2xl font-bold text-indigo-600 hover:text-indigo-700 transition duration-300" onclick="showSection('home')">Matías Ponce</a>
             </div>
-            <div class="lang-en">
+            <div id="siteTitleEn">
                 <a href="#" class="text-2xl font-bold text-indigo-600 hover:text-indigo-700 transition duration-300" onclick="showSection('home')">Matías Ponce</a>
             </div>
-            <div class="flex items-center space-x-6"> 
-                <div class="lang-es active-lang space-x-6"> 
+
+            <div class="flex items-center">
+                <!-- Los contenedores de navegación ahora tienen la clase flex items-center permanentemente -->
+                <!-- Los enlaces tienen ml-8 para espaciado constante -->
+                <div id="navMenuEs" class="active-menu flex items-center">
                     <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300" onclick="showSection('home')">Inicio</a>
-                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300" onclick="showSection('portfolio')">Portfolio</a>
-                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300" onclick="showSection('tutoring')">Clases</a>
-                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300" onclick="showSection('contact')">Contacto</a>
+                    <a href="#" id="navPortfolioLinkEs" class="text-gray-600 hover:text-indigo-600 transition duration-300 ml-8" onclick="showSection('portfolio')">Portfolio</a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300 ml-8" onclick="showSection('tutoring')">Clases</a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300 ml-8" onclick="showSection('contact')">Contacto</a>
                 </div>
-                 <div class="lang-en space-x-6"> 
+                 <div id="navMenuEn" class="flex items-center">
                     <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300" onclick="showSection('home')">Home</a>
-                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300" onclick="showSection('portfolio')">Portfolio</a>
-                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300" onclick="showSection('tutoring')">Tutoring</a>
-                     <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300" onclick="showSection('contact')">Contact</a>
+                    <a href="#" id="navPortfolioLinkEn" class="text-gray-600 hover:text-indigo-600 transition duration-300 ml-8" onclick="showSection('portfolio')">Portfolio</a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300 ml-8" onclick="showSection('tutoring')">Tutoring</a>
+                     <a href="#" class="text-gray-600 hover:text-indigo-600 transition duration-300 ml-8" onclick="showSection('contact')">Contact</a>
                 </div>
-                <button id="languageToggle" class="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 transition duration-300 text-sm">
+                <button id="languageToggle" class="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 transition duration-300 text-sm ml-4">
                     English
                 </button>
             </div>
@@ -105,9 +125,9 @@
         <section id="home" class="section active fade-in">
             <div class="lang-es active-lang">
                 <div class="text-center mb-12">
-                    <div class="profile-photo-container mb-6">
+                    <div id="profilePhotoContainerEs" class="profile-photo-container mb-6">
                         {/* Reemplaza el src con la URL de tu foto actual */}
-                        <img id="profileImagePreviewEs" src="https://placehold.co/300x300/E2E8F0/334155?text=Tu+Foto+Aqu%C3%AD" alt="Foto Profesional de Matías Ponce" class="profile-photo">
+                        <img id="profileImagePreviewEs" src="https://placehold.co/300x300/E2E8F0/334155?text=Tu+Foto+Aquí" alt="Foto Profesional de Matías Ponce" class="profile-photo">
                     </div>
                     <h1 class="text-4xl md:text-5xl font-bold text-indigo-700 mb-2">Matías Ponce Holtmann</h1>
                     <p class="text-xl text-gray-600 mb-6">Ingeniero Civil Industrial | Análisis de Datos y Business Intelligence</p>
@@ -208,7 +228,7 @@
 
             <div class="lang-en">
                 <div class="text-center mb-12">
-                     <div class="profile-photo-container mb-6">
+                     <div id="profilePhotoContainerEn" class="profile-photo-container mb-6">
                         {/* Reemplaza el src con la URL de tu foto actual */}
                         <img id="profileImagePreviewEn" src="https://placehold.co/300x300/E2E8F0/334155?text=Your+Photo+Here" alt="Professional Photo of Matías Ponce" class="profile-photo">
                     </div>
@@ -238,7 +258,7 @@
                             <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
                                 <li>Maintenance and improvement tasks in reporting processes.</li>
                                 <li>ETL optimization, data cleaning, and database consolidation.</li>
-                                <li>Development, modification, and migration of views in PowerBI and Tableau for Walmart Connect.</li>
+                                <li>Development, modification y migration of views in PowerBI and Tableau for Walmart Connect.</li>
                             </ul>
                         </div>
                         <div>
@@ -269,17 +289,17 @@
                         </ul>
                     </div>
                 </div>
-                
+
                 <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
-                    <h2 class="text-3xl font-semibold text-indigo-600 mb-6">Technical Skills</h2>
-                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                    <h2 class="text-3xl font-semibold text-indigo-600 mb-6">Habilidades Técnicas</h2>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                         <div class="text-center p-4 bg-indigo-50 rounded-lg shadow">
                             <h4 class="font-semibold text-indigo-700">Python</h4>
                             <p class="text-sm text-gray-600">(Pandas, NumPy, Seaborn, Plotly)</p>
                         </div>
                         <div class="text-center p-4 bg-indigo-50 rounded-lg shadow">
                             <h4 class="font-semibold text-indigo-700">SQL</h4>
-                            <p class="text-sm text-gray-600">(Joins, Subqueries, Aggregate Functions)</p>
+                            <p class="text-sm text-gray-600">(Joins, Subqueries, Funciones Agregadas)</p>
                         </div>
                         <div class="text-center p-4 bg-indigo-50 rounded-lg shadow">
                             <h4 class="font-semibold text-indigo-700">Power BI</h4>
@@ -287,11 +307,11 @@
                         </div>
                         <div class="text-center p-4 bg-indigo-50 rounded-lg shadow">
                             <h4 class="font-semibold text-indigo-700">Tableau</h4>
-                            <p class="text-sm text-gray-600">(Dashboards, Calculated Fields)</p>
+                            <p class="text-sm text-gray-600">(Dashboards, Campos Calculados)</p>
                         </div>
                         <div class="text-center p-4 bg-indigo-50 rounded-lg shadow">
-                            <h4 class="font-semibold text-indigo-700">Advanced Excel</h4>
-                            <p class="text-sm text-gray-600">(Pivot Tables, Functions)</p>
+                            <h4 class="font-semibold text-indigo-700">Excel Avanzado</h4>
+                            <p class="text-sm text-gray-600">(Tablas Dinámicas, Funciones)</p>
                         </div>
                         <div class="text-center p-4 bg-indigo-50 rounded-lg shadow">
                             <h4 class="font-semibold text-indigo-700">R</h4>
@@ -305,11 +325,12 @@
                             <h4 class="font-semibold text-indigo-700">LaTeX</h4>
                         </div>
                     </div>
-                    <p class="text-center mt-6 text-gray-700"><strong>Languages:</strong> Native Spanish, English (Level B2+/C1, EF SET 74/100)</p>
+                     <p class="text-center mt-6 text-gray-700"><strong>Idiomas:</strong> Inglés (Nivel B2+/C1, EF SET 74/100)</p>
                 </div>
             </div>
         </section>
 
+        <!-- Se ha añadido un ID para controlar la visibilidad de la sección de portfolio -->
         <section id="portfolio" class="section fade-in">
             <div class="lang-es active-lang">
                 <h2 class="text-4xl font-bold text-center text-indigo-700 mb-12">Portfolio de Proyectos</h2>
@@ -370,19 +391,19 @@
                             <p class="text-gray-700 mb-4 text-sm">
                                 Development of a machine learning model to predict the likelihood of a customer discontinuing a service.
                             </p>
-                             <p class="text-gray-600 text-xs mb-3"><strong>Technologies:</strong> Python (Scikit-learn, Pandas), Jupyter Notebooks</p>
+                             <p class="text-gray-600 text-xs mb-3"><strong>Tecnologías:</strong> Python (Scikit-learn, Pandas), Jupyter Notebooks</p>
                             <a href="#" class="inline-block bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 transition duration-300 text-sm">View Project (Soon)</a>
                         </div>
                     </div>
                     <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
-                        <img src="https://placehold.co/600x400/DDD6FE/4F46E5?text=Project+3" alt="Interactive Dashboard Project 3" class="w-full h-48 object-cover">
+                        <img src="https://placehold.co/600x400/DDD6FE/4F46E5?text=Proyecto+3" alt="Dashboard Interactivo Proyecto 3" class="w-full h-48 object-cover">
                         <div class="p-6">
                             <h3 class="text-2xl font-semibold text-indigo-600 mb-2">Interactive KPI Dashboard</h3>
                             <p class="text-gray-700 mb-4 text-sm">
-                                Creation of a Power BI dashboard to visualize key performance indicators (KPIs) for a department.
+                                Creación de un dashboard en Power BI para visualizar indicadores clave de rendimiento (KPIs) de un departamento.
                             </p>
-                            <p class="text-gray-600 text-xs mb-3"><strong>Technologies:</strong> Power BI, DAX, SQL</p>
-                            <a href="#" class="inline-block bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 transition duration-300 text-sm">View Project (Soon)</a>
+                            <p class="text-gray-600 text-xs mb-3"><strong>Tecnologías:</strong> Power BI, DAX, SQL</p>
+                            <a href="#" class="inline-block bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 transition duration-300 text-sm">Ver Proyecto (Pronto)</a>
                         </div>
                     </div>
                     </div>
@@ -476,7 +497,7 @@
                      <div class="space-y-4">
                         <div class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                              <path fill-rule="evenodd" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
                             <a href="mailto:matiasmiph@gmail.com" class="text-indigo-600 hover:underline">matiasmiph@gmail.com</a>
                         </div>
@@ -510,75 +531,124 @@
     </footer>
 
     <script>
+        // CONTROL DE VISIBILIDAD DE FEATURES
+        // Cambia estas variables a true o false para activar/desactivar las features
+        const showProfilePhoto = false; // true para mostrar la foto de perfil, false para ocultarla
+        const showPortfolioSection = false; // true para mostrar la sección de Portfolio, false para ocultarla
+
         let currentLanguage = 'es'; // Default language
         const sections = document.querySelectorAll('.section');
-        // const mainContent = document.getElementById('mainContent'); // No longer needed for scrolling the whole main content
 
         function showSection(sectionId) {
             let targetSection = null;
             sections.forEach(section => {
+                // Primero, ocultar todas las secciones por defecto
+                section.classList.remove('active', 'fade-in');
+                section.style.display = 'none';
+
+                // Si esta es la sección solicitada, o si es la sección 'home' y se ha pedido 'home'
                 if (section.id === sectionId) {
-                    section.classList.add('active', 'fade-in');
-                    targetSection = section; // Store the section to scroll to
-                    // If switching to tutoring, ensure Spanish is active for its content
-                    if (sectionId === 'tutoring') {
-                        switchToLanguage('es', false); // Switch language logic but don't re-show section
-                        // Ensure tutoring specific content is visible
-                        document.querySelector('#tutoring .lang-es').classList.add('active-lang');
-                        document.querySelector('#tutoring .lang-en').classList.remove('active-lang');
+                    // Si showPortfolioSection es false y la sección solicitada es 'portfolio', no la mostramos.
+                    // Esto evita mostrar el portfolio si está deshabilitado globalmente.
+                    if (section.id === 'portfolio' && !showPortfolioSection) {
+                        return; // Salir de la iteración para esta sección, manteniéndola oculta
                     }
-                } else {
-                    section.classList.remove('active', 'fade-in');
+                    section.classList.add('active', 'fade-in');
+                    section.style.display = 'block'; // Asegurarse de que la sección activa se muestre
+                    targetSection = section;
+
+                    // Si la sección es 'tutoring', forzar el idioma español para su contenido
+                    if (sectionId === 'tutoring') {
+                        currentLanguage = 'es'; // Asegurar que el estado global de idioma sea español
+                        updateLanguageContent('es'); // Actualizar contenido basado en español
+                    }
                 }
             });
-            
-            // Scroll the target section into view
+
+            // Si la sección de portfolio está configurada para no mostrarse, asegúrate de que esté oculta
+            // independientemente de lo que intente showSection. Esto evita que aparezca si se llama a otra sección.
+            const portfolioSection = document.getElementById('portfolio');
+            if (portfolioSection && !showPortfolioSection) {
+                portfolioSection.style.display = 'none';
+                portfolioSection.classList.remove('active', 'fade-in');
+            }
+
+
+            // Desplazar la sección objetivo a la vista
             if (targetSection) {
                 targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
-        
+
         function updateLanguageContent(lang) {
-            document.documentElement.lang = lang; // Update html lang attribute
-            const langEsElements = document.querySelectorAll('.lang-es');
-            const langEnElements = document.querySelectorAll('.lang-en');
+            document.documentElement.lang = lang; // Actualizar el atributo lang de la etiqueta html
+
+            // Ocultar todos los elementos con clases de idioma (ej. lang-es, lang-en)
+            document.querySelectorAll('[class*="lang-"]').forEach(el => el.classList.remove('active-lang'));
+
+            // Mostrar solo los elementos del idioma activo
+            document.querySelectorAll(`.lang-${lang}`).forEach(el => el.classList.add('active-lang'));
+
+            // Actualizar el texto del botón de cambio de idioma
             const toggleButton = document.getElementById('languageToggle');
+            toggleButton.textContent = (lang === 'es') ? 'English' : 'Español';
+
+            // Controlar la visibilidad de los menús de navegación y títulos principales
+            const navMenuEs = document.getElementById('navMenuEs');
+            const navMenuEn = document.getElementById('navMenuEn');
+            const siteTitleEs = document.getElementById('siteTitleEs');
+            const siteTitleEn = document.getElementById('siteTitleEn');
+
+            // Eliminar clases activas de menús y títulos antes de aplicar nuevas
+            navMenuEs.classList.remove('active-menu');
+            navMenuEn.classList.remove('active-menu');
+            siteTitleEs.classList.remove('active-title');
+            siteTitleEn.classList.remove('active-title');
 
             if (lang === 'es') {
-                langEsElements.forEach(el => el.classList.add('active-lang'));
-                langEnElements.forEach(el => el.classList.remove('active-lang'));
-                toggleButton.textContent = 'English';
+                navMenuEs.classList.add('active-menu');
+                siteTitleEs.classList.add('active-title');
             } else {
-                langEnElements.forEach(el => el.classList.add('active-lang'));
-                langEsElements.forEach(el => el.classList.remove('active-lang'));
-                toggleButton.textContent = 'Español';
+                navMenuEn.classList.add('active-menu');
+                siteTitleEn.classList.add('active-title');
             }
+
+            // Llamar a la función para actualizar la visibilidad de las features (fotos, link portfolio nav)
+            updateFeatureVisibility();
         }
 
-        function switchToLanguage(lang, triggerShowSection = true) {
+        function switchToLanguage(lang) {
             currentLanguage = lang;
             updateLanguageContent(lang);
+        }
 
-            const activeSection = document.querySelector('.section.active');
-            if (activeSection && activeSection.id === 'tutoring') {
-                if (lang === 'en') {
-                    document.querySelector('#tutoring .lang-es').classList.remove('active-lang');
-                    document.querySelector('#tutoring .lang-en').classList.add('active-lang');
-                } else { // lang === 'es'
-                    document.querySelector('#tutoring .lang-en').classList.remove('active-lang');
-                    document.querySelector('#tutoring .lang-es').classList.add('active-lang');
-                }
+        // Función para controlar la visibilidad de la foto de perfil y el ENLACE de Portafolio en la navegación
+        function updateFeatureVisibility() {
+            const profilePhotoContainerEs = document.getElementById('profilePhotoContainerEs');
+            const profilePhotoContainerEn = document.getElementById('profilePhotoContainerEn');
+            const navPortfolioLinkEs = document.getElementById('navPortfolioLinkEs');
+            const navPortfolioLinkEn = document.getElementById('navPortfolioLinkEn');
+            // NO TOCAR la visibilidad de la sección 'portfolio' aquí, eso es responsabilidad de showSection()
+            // const portfolioSection = document.getElementById('portfolio'); // <- REMOVED THIS LINE
+
+            // Controlar la visibilidad de la foto de perfil
+            if (profilePhotoContainerEs) {
+                profilePhotoContainerEs.style.display = showProfilePhoto ? 'block' : 'none';
             }
-            
-            const navLangEs = document.querySelector('nav .lang-es');
-            const navLangEn = document.querySelector('nav .lang-en');
-            if (lang === 'es') {
-                navLangEs.classList.add('active-lang');
-                navLangEn.classList.remove('active-lang');
-            } else {
-                navLangEn.classList.add('active-lang');
-                navLangEs.classList.remove('active-lang');
+            if (profilePhotoContainerEn) {
+                profilePhotoContainerEn.style.display = showProfilePhoto ? 'block' : 'none';
             }
+
+            // Controlar la visibilidad del enlace de navegación del Portafolio
+            if (navPortfolioLinkEs) {
+                navPortfolioLinkEs.style.display = showPortfolioSection ? 'block' : 'none';
+            }
+            if (navPortfolioLinkEn) {
+                navPortfolioLinkEn.style.display = showPortfolioSection ? 'block' : 'none';
+            }
+
+            // La visibilidad de la sección completa de Portfolio ahora es gestionada por showSection()
+            // Si showPortfolioSection es false, showSection ya se encarga de que no se active.
         }
 
 
@@ -586,18 +656,22 @@
             const newLang = currentLanguage === 'es' ? 'en' : 'es';
             switchToLanguage(newLang);
         });
-        
-        // Set current year in footer
+
+        // Establecer el año actual en el footer
         const year = new Date().getFullYear();
         const currentYearEsEl = document.getElementById('currentYearEs');
         const currentYearEnEl = document.getElementById('currentYearEn');
         if(currentYearEsEl) currentYearEsEl.textContent = year;
         if(currentYearEnEl) currentYearEnEl.textContent = year;
 
-        // Initial setup
+        // Configuración inicial al cargar el documento
         document.addEventListener('DOMContentLoaded', () => {
-            showSection('home'); // Show home section by default
-            switchToLanguage('es'); // Set default language to Spanish and update content
+            // Llamar a la función para establecer la visibilidad inicial de las features
+            updateFeatureVisibility();
+            // Mostrar la sección 'home' por defecto
+            showSection('home');
+            // Establecer el idioma por defecto a español y actualizar el contenido
+            switchToLanguage('es');
         });
     </script>
 </body>
